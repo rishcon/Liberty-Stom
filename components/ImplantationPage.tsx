@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, MessageCircle, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,6 +26,7 @@ const faq = [
 export function ImplantationPage() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   return (
     <>
@@ -80,10 +81,26 @@ export function ImplantationPage() {
           <div><p className="eyebrow">FAQ</p><h2>Частые вопросы</h2><p>Коротко отвечаем на то, что чаще всего волнует пациентов перед имплантацией.</p></div>
           <div className="faq-list">
             {faq.map(([question, answer], index) => (
-              <div key={question} className={openFaq === index ? "open" : ""}>
-                <button onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>{question}</span><ChevronDown /></button>
-                <motion.p initial={false} animate={{ height: openFaq === index ? "auto" : 0, opacity: openFaq === index ? 1 : 0 }}>{answer}</motion.p>
-              </div>
+              <motion.div key={question} className={openFaq === index ? "open" : ""} layout={!reduceMotion}>
+                <button
+                  id={`faq-trigger-${index}`}
+                  aria-expanded={openFaq === index}
+                  aria-controls={`faq-panel-${index}`}
+                  onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                >
+                  <span>{question}</span><ChevronDown />
+                </button>
+                <motion.p
+                  id={`faq-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-trigger-${index}`}
+                  initial={false}
+                  animate={{ height: openFaq === index ? "auto" : 0, opacity: openFaq === index ? 1 : 0 }}
+                  transition={reduceMotion ? { duration: 0.15 } : { type: "spring", stiffness: 420, damping: 42, mass: 0.8 }}
+                >
+                  {answer}
+                </motion.p>
+              </motion.div>
             ))}
           </div>
         </section>
