@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description:
     "Современная стоматология для взрослых и детей. Имплантация, ортодонтия, хирургия и лечение во сне.",
   alternates: { canonical: "/" },
+  icons: { icon: "/logo.png", apple: "/logo.png" },
   openGraph: {
     title: "Liberty Stom — семейная стоматология в Астане",
     description: "Современное лечение взрослых и детей — спокойно, понятно и без лишнего стресса.",

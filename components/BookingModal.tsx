@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion, PanInfo, useDragControls, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, MessageCircle, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
+import Image from "next/image";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
 type BookingModalProps = {
@@ -17,10 +18,12 @@ const services = [
   "Лечение зубов",
   "Удаление",
   "Лечение во сне",
+  "Протезирование",
+  "Хирургия",
   "Не знаю",
 ];
 
-const branches = ["Мухамеджанова, 11", "Байтурсынова, 53", "Сарайшык, 36"];
+const branches = ["Кайым Мухамедханов, 11", "Сарайшык, 36", "Ахмет Байтурсынулы, 53"];
 
 export function BookingModal({ open, onClose, initialService }: BookingModalProps) {
   const [step, setStep] = useState(1);
@@ -96,6 +99,11 @@ export function BookingModal({ open, onClose, initialService }: BookingModalProp
     return () => query.removeEventListener("change", update);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    dialogRef.current?.scrollTo({ top: 0, behavior: "auto" });
+  }, [open, step, sent]);
+
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSent(true);
@@ -152,7 +160,7 @@ export function BookingModal({ open, onClose, initialService }: BookingModalProp
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <MessageCircle size={18} /> Написать в WhatsApp
+                  <Image className="wa-icon" src="/wa.png" alt="" width={22} height={22} /> Написать в WhatsApp
                 </a>
               </motion.div>
             ) : (
@@ -166,7 +174,7 @@ export function BookingModal({ open, onClose, initialService }: BookingModalProp
                 </div>
                 <p className="eyebrow">Шаг {step} из 3</p>
 
-                <AnimatePresence initial={false} custom={direction}>
+                <AnimatePresence initial={false} custom={direction} mode="wait">
                 {step === 1 && (
                   <motion.div
                     key="booking-step-1"
