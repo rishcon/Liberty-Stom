@@ -251,7 +251,7 @@ export function BookingModal({ open, onClose, initialService }: BookingModalProp
                     </label>
                     <label className="field-label">
                       Телефон
-                      <input required name="phone" type="tel" placeholder="+7 700 000 00 00" autoComplete="tel" />
+                      <input required name="phone" type="tel" placeholder="+7 701 116 1800" autoComplete="tel" />
                     </label>
                     <label className="field-label">
                       Комментарий <span>необязательно</span>

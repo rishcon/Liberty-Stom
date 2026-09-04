@@ -330,12 +330,12 @@ export function LandingPage() {
       <footer className="site-footer">
         <div className="footer-brand"><Link className="footer-logo" href="/"><Image src="/logo.png" alt="Liberty Stom" width={54} height={54} /><strong>LIBERTY STOM</strong></Link><p>Семейная стоматология<br />в Астане</p></div>
         <div><span>Навигация</span><a href="#services">Услуги</a><a href="#doctors">Врачи</a><a href="#branches">Филиалы</a></div>
-        <div><span>Контакты</span><a href="tel:+77010010001">+7 701 001 00 01</a><a href="mailto:info@libertystom.kz">info@libertystom.kz</a><a className="footer-instagram" href="https://www.instagram.com/liberty_stom/" target="_blank" rel="noreferrer"><Image src="/instagram.png" alt="" width={22} height={22} /> @liberty_stom</a></div>
+        <div><span>Контакты</span><a href="tel:+7 701 116 1800">+7 701 116 1800</a><a href="mailto:info@libertystom.kz">info@libertystom.kz</a><a className="footer-instagram" href="https://www.instagram.com/liberty_stom/" target="_blank" rel="noreferrer"><Image src="/instagram.png" alt="" width={22} height={22} /> @liberty_stom</a></div>
         <p className="copyright">© Liberty Stom 2026</p>
       </footer>
 
       <div className="mobile-sticky">
-        <a href="tel:+77010010001"><Phone size={18} />Позвонить</a>
+        <a href="tel:+7 701 116 1800"><Phone size={18} />Позвонить</a>
         <a href="https://wa.me/77010010001" target="_blank" rel="noreferrer"><Image className="wa-icon" src="/wa.png" alt="" width={21} height={21} />WhatsApp</a>
         <button onClick={() => openBooking()}><CalendarDays size={18} />Записаться</button>
       </div>

@@ -53,7 +53,7 @@ export function Header({ onBook, light = false }: HeaderProps) {
         <a className="header-social" href="https://www.instagram.com/liberty_stom/" target="_blank" rel="noreferrer" aria-label="Liberty Stom в Instagram">
           <Image src="/instagram.png" alt="" width={26} height={26} />
         </a>
-        <a className="header-phone" href="https://wa.me/77010010001" target="_blank" rel="noreferrer" aria-label="Написать в WhatsApp: +7 701 001 00 01"><Image src="/wa.png" alt="" width={23} height={23} />+7 701 001 00 01</a>
+        <a className="header-phone" href="https://wa.me+7 701 116 1800" target="_blank" rel="noreferrer" aria-label="Написать в WhatsApp: +7 701 116 1800"><Image src="/wa.png" alt="" width={23} height={23} />+7 701 116 1800</a>
         <button className="button button-small button-dark" onClick={onBook}>Записаться</button>
       </div>
       <button
