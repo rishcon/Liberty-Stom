@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { doctorDirections, doctors, type DoctorDirection } from "@/data/doctors";
+import { safeReveal } from "@/lib/motion";
 
 type DoctorsSectionProps = {
   onBook: (service?: string) => void;
@@ -48,13 +49,13 @@ export function DoctorsSection({ onBook }: DoctorsSectionProps) {
 
   return (
     <section className="section doctors-showcase" id="doctors">
-      <div className="doctors-showcase-heading">
+      <motion.div className="doctors-showcase-heading" {...safeReveal}>
         <div>
           <p className="eyebrow">Наша команда</p>
           <h2>Врачи, которым<br />можно доверять</h2>
         </div>
         <p>Выберите направление и познакомьтесь со специалистами, которые будут рядом на каждом этапе лечения.</p>
-      </div>
+      </motion.div>
 
       <div className="doctor-filters" role="tablist" aria-label="Направления врачей">
         {doctorDirections.map((item) => (
@@ -90,6 +91,8 @@ export function DoctorsSection({ onBook }: DoctorsSectionProps) {
         ref={trackRef}
         className={showAll ? "doctors-track doctors-grid-view" : "doctors-track"}
         layout={!reduceMotion}
+        data-reveal-delay="90"
+        {...safeReveal}
       >
         <AnimatePresence initial={false} mode="popLayout">
           {visibleDoctors.map((doctor, index) => (

@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  ArrowLeft,
   ArrowRight,
   CalendarDays,
   Heart,
@@ -14,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { services } from "@/data/services";
+import { safeReveal } from "@/lib/motion";
 import { BookingModal } from "./BookingModal";
 import { DoctorsSection } from "./DoctorsSection";
 import { Header } from "./Header";
@@ -49,18 +51,20 @@ const instagramPhotos = [
   { src: "/images/service-implantation.png", alt: "Консультация имплантолога Liberty Stom" },
 ];
 
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.55 },
-};
+const reviews = [
+  { name: "Алия М.", service: "Комплексное лечение", text: "Очень внимательный врач: всё объяснили простыми словами и составили понятный план лечения. На каждом этапе я знала, что и зачем мы делаем." },
+  { name: "Айжан Н.", service: "Детская стоматология", text: "Лечили ребёнку зубы во сне. Всё прошло спокойно, команда была рядом и подробно отвечала на вопросы. Ребёнок даже не испугался." },
+  { name: "Ольга К.", service: "Профилактический приём", text: "Чисто, современно и без очередей. Особенно понравились профессиональный подход врача и отзывчивость администраторов." },
+];
+
+const twoGisReviewsUrl = "https://2gis.kz/astana/firm/70000001090596186/tab/reviews";
 
 export function LandingPage() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [initialService, setInitialService] = useState<string>();
   const [selectedHelp, setSelectedHelp] = useState(1);
   const [selectedBranch, setSelectedBranch] = useState(0);
+  const [selectedReview, setSelectedReview] = useState(0);
 
   const openBooking = (service?: string) => {
     setInitialService(service);
@@ -91,13 +95,13 @@ export function LandingPage() {
         </section>
 
         <section className="section services-section" id="services">
-          <motion.div className="section-heading split-heading" {...fadeUp}>
+          <motion.div className="section-heading split-heading" {...safeReveal}>
             <div><p className="eyebrow">Услуги</p><h2>Популярные<br />направления</h2></div>
             <p>Помогаем сохранить здоровье зубов и вернуть уверенность в улыбке — для взрослых и детей.</p>
           </motion.div>
           <div className="service-grid">
             {services.map((service, index) => (
-              <motion.article key={service.slug} className="service-item" {...fadeUp} transition={{ duration: 0.45, delay: index * 0.04 }}>
+              <motion.article key={service.slug} className="service-item" data-reveal-delay={index * 45} {...safeReveal}>
                 <Link className="service-visual" href={`/services/${service.slug}`} aria-label={`Подробнее: ${service.title}`}>
                   <Image src={service.image} alt={service.imageAlt} fill sizes="(max-width: 760px) 50vw, 17vw" className="service-card-image" />
                 </Link>
@@ -111,12 +115,12 @@ export function LandingPage() {
 
         <section className="section help-section" id="help">
           <div className="help-shell">
-            <motion.div className="section-heading" {...fadeUp}>
+            <motion.div className="section-heading" {...safeReveal}>
               <p className="eyebrow">Подбор лечения</p>
               <h2>Что вас беспокоит?</h2>
               <p>Выберите ситуацию — мы подскажем, с какого специалиста начать.</p>
             </motion.div>
-            <div className="help-layout">
+            <motion.div className="help-layout" data-reveal-delay="80" {...safeReveal}>
               <div className="help-options" aria-label="Выбор ситуации">
                 {helpOptions.map(([label], index) => (
                   <button key={label} className={selectedHelp === index ? "active" : ""} onClick={() => setSelectedHelp(index)}>
@@ -140,14 +144,14 @@ export function LandingPage() {
                   <button className="button help-answer-cta" onClick={() => openBooking(helpOptions[selectedHelp][1])}>Записаться <ArrowRight size={18} /></button>
                 </motion.aside>
               </AnimatePresence>
-            </div>
+            </motion.div>
           </div>
         </section>
 
         <DoctorsSection onBook={openBooking} />
 
         <section className="section implant-section" id="implantation">
-          <motion.div className="implant-copy" {...fadeUp}>
+          <motion.div className="implant-copy" {...safeReveal}>
             <p className="eyebrow">Имплантация</p>
             <h2>Верните улыбке<br />целостность</h2>
             <p>Персональный план лечения, цифровая диагностика и сопровождение на каждом этапе.</p>
@@ -157,16 +161,16 @@ export function LandingPage() {
               <button className="text-link" onClick={() => openBooking("Имплантация")}>Получить консультацию <ArrowRight size={17} /></button>
             </div>
           </motion.div>
-          <motion.div className="implant-image" {...fadeUp}>
+          <motion.div className="implant-image" data-reveal-delay="90" {...safeReveal}>
             <Image src="/images/service-implantation.png" alt="Имплантолог объясняет пациентке план лечения" fill sizes="(max-width: 800px) 100vw, 55vw" className="cover-image" />
           </motion.div>
         </section>
 
         <section className="section clinic-section" id="about">
-          <motion.div className="clinic-image" {...fadeUp}>
+          <motion.div className="clinic-image" {...safeReveal}>
             <Image src="/images/clinic-interior.png" alt="Интерьер Liberty Stom" fill sizes="(max-width: 800px) 100vw, 58vw" className="cover-image" />
           </motion.div>
-          <motion.div className="clinic-copy" {...fadeUp}>
+          <motion.div className="clinic-copy" data-reveal-delay="90" {...safeReveal}>
             <p className="eyebrow">О клинике</p>
             <h2>Комфорт начинается<br />ещё до лечения</h2>
             <p>Современное оборудование, внимательная команда и спокойная атмосфера в каждом филиале.</p>
@@ -180,31 +184,65 @@ export function LandingPage() {
 
         <section className="section trust-section">
           <p className="eyebrow">Доверие, проверенное временем</p>
-          <div className="trust-grid">
+          <motion.div className="trust-grid" {...safeReveal}>
             <div><strong>12+</strong><span>лет опыта</span></div>
             <div><strong>20 000+</strong><span>пациентов</span></div>
             <div><strong>4.9</strong><span>средний рейтинг</span></div>
             <div><strong>3</strong><span>филиала в Астане</span></div>
-          </div>
+          </motion.div>
         </section>
 
-        <section className="section reviews-section">
-          <div className="section-heading split-heading"><div><p className="eyebrow">Отзывы</p><h2>Пациенты о нас</h2></div><a className="text-link" href="#">Все отзывы на 2GIS <ArrowRight size={17} /></a></div>
-          <div className="reviews-grid">
-            {[
-              ["Алия М.", "Очень внимательный врач, всё объяснили и составили понятный план лечения."],
-              ["Айжан Н.", "Лечили ребёнку зубы во сне. Всё прошло спокойно, ребёнок даже не испугался."],
-              ["Ольга К.", "Чисто, современно, без очередей. Профессиональный подход и отзывчивый сервис."],
-            ].map(([name, text]) => (
-              <motion.blockquote key={name} {...fadeUp}>
-                <span className="stars">★★★★★</span><p>{text}</p><footer><strong>{name}</strong><span>2GIS</span></footer>
-              </motion.blockquote>
-            ))}
+        <section className="reviews-section" id="reviews">
+          <div className="reviews-shell">
+            <motion.aside className="reviews-rating" {...safeReveal}>
+              <p className="eyebrow">Нас рекомендуют</p>
+              <strong>4.9</strong>
+              <div className="reviews-rating-stars" aria-label="Рейтинг 4,9 из 5">★★★★★</div>
+              <span>рейтинг клиники в 2ГИС</span>
+              <a className="reviews-2gis-link" href={twoGisReviewsUrl} target="_blank" rel="noreferrer">
+                <Image src="/2gis.png" alt="2ГИС" width={34} height={34} />
+                <span>Все отзывы на 2GIS</span>
+                <ArrowRight size={17} />
+              </a>
+            </motion.aside>
+
+            <motion.div className="review-stage" data-reveal-delay="90" {...safeReveal}>
+              <div className="review-stage-heading">
+                <div><p className="eyebrow">Отзывы</p><h2>Пациенты о нас</h2></div>
+                <span>{String(selectedReview + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}</span>
+              </div>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.blockquote
+                  key={reviews[selectedReview].name}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: .24 }}
+                >
+                  <span className="review-quote-mark" aria-hidden="true">“</span>
+                  <p>{reviews[selectedReview].text}</p>
+                  <footer>
+                    <span className="review-avatar">{reviews[selectedReview].name.charAt(0)}</span>
+                    <span><strong>{reviews[selectedReview].name}</strong><small>{reviews[selectedReview].service}</small></span>
+                    <a href={twoGisReviewsUrl} target="_blank" rel="noreferrer"><Image src="/2gis.png" alt="2ГИС" width={26} height={26} /> 2ГИС</a>
+                  </footer>
+                </motion.blockquote>
+              </AnimatePresence>
+              <div className="review-controls">
+                <div className="review-dots" aria-label="Выбрать отзыв">
+                  {reviews.map((review, index) => <button key={review.name} className={selectedReview === index ? "active" : ""} onClick={() => setSelectedReview(index)} aria-label={`Отзыв ${index + 1}`} aria-pressed={selectedReview === index} />)}
+                </div>
+                <div>
+                  <button onClick={() => setSelectedReview((selectedReview - 1 + reviews.length) % reviews.length)} aria-label="Предыдущий отзыв"><ArrowLeft /></button>
+                  <button onClick={() => setSelectedReview((selectedReview + 1) % reviews.length)} aria-label="Следующий отзыв"><ArrowRight /></button>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
         <section className="section instagram-section" id="instagram">
-          <motion.div className="instagram-heading" {...fadeUp}>
+          <motion.div className="instagram-heading" {...safeReveal}>
             <div className="instagram-profile">
               <Image src="/instagram.png" alt="" width={56} height={56} />
               <div><p className="eyebrow">Instagram</p><h2>@liberty_stom</h2></div>
@@ -223,8 +261,8 @@ export function LandingPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Открыть Instagram Liberty Stom: ${photo.alt}`}
-                {...fadeUp}
-                transition={{ duration: .45, delay: index * .045 }}
+                data-reveal-delay={index * 45}
+                {...safeReveal}
               >
                 <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 760px) 72vw, 32vw" className="cover-image" />
                 <span><Image src="/instagram.png" alt="" width={25} height={25} /> Смотреть в Instagram</span>
@@ -234,7 +272,7 @@ export function LandingPage() {
         </section>
 
         <section className="section branches-section" id="branches">
-          <div className="branches-copy">
+          <motion.div className="branches-copy" {...safeReveal}>
             <p className="eyebrow">Филиалы</p><h2>Три филиала<br />в Астане</h2>
             <div className="branch-list">
               {branches.map((branch, index) => (
@@ -250,8 +288,8 @@ export function LandingPage() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="map-art">
+          </motion.div>
+          <motion.div className="map-art" data-reveal-delay="90" {...safeReveal}>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={branches[selectedBranch].id}
@@ -276,17 +314,17 @@ export function LandingPage() {
                 Построить маршрут
               </a>
             </div>
-          </div>
+          </motion.div>
         </section>
 
-        <section className="section consultation" id="booking">
+        <motion.section className="section consultation" id="booking" {...safeReveal}>
           <div><p className="eyebrow">Первый шаг</p><h2>Начните с<br />консультации</h2><p>Оставьте номер — администратор поможет выбрать врача и удобное время.</p></div>
           <div className="consultation-actions">
             <button className="button button-light" onClick={() => openBooking()}>Записаться <CalendarDays size={18} /></button>
             <span>или</span>
             <a className="whatsapp-link" href="https://wa.me/77010010001?text=Здравствуйте!%20Хочу%20записаться%20на%20консультацию." target="_blank" rel="noreferrer"><Image className="wa-icon" src="/wa.png" alt="" width={34} height={34} /> Написать<br />в WhatsApp</a>
           </div>
-        </section>
+        </motion.section>
       </main>
 
       <footer className="site-footer">
