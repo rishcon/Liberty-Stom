@@ -20,7 +20,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
   const faqSpring = reduceMotion
     ? { duration: 0.15 }
     : { type: "spring" as const, stiffness: 420, damping: 42, mass: 0.8 };
-  const whatsappUrl = `https://wa.me/77010010001?text=${encodeURIComponent(service.whatsappText)}`;
+  const whatsappUrl = `https://wa.me/77071161800?text=${encodeURIComponent(service.whatsappText)}`;
 
   return (
     <>
@@ -114,8 +114,9 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
         </section>
       </main>
 
-      <footer className="simple-footer"><Link className="simple-footer-logo" href="/"><Image src="/logo.png" alt="Liberty Stom" width={44} height={44} /><span>LIBERTY STOM</span></Link><span>Семейная стоматология в Астане</span><a href="tel:+77010010001">+7 701 001 00 01</a></footer>
+      <footer className="simple-footer"><Link className="simple-footer-logo" href="/"><Image src="/logo.png" alt="Liberty Stom" width={44} height={44} /><span>LIBERTY STOM</span></Link><span>Семейная стоматология в Астане</span><a href="tel:+77011161800">+7 701 116 1800</a></footer>
       <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} initialService={service.title} />
     </>
   );
 }
+  

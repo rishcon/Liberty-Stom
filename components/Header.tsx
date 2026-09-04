@@ -77,7 +77,7 @@ export function Header({ onBook, light = false }: HeaderProps) {
           >
             {nav.map(([label, href]) => <Link key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>)}
             <a className="mobile-instagram" href="https://www.instagram.com/liberty_stom/" target="_blank" rel="noreferrer"><Image src="/instagram.png" alt="" width={25} height={25} /> Instagram</a>
-            <a className="mobile-phone" href="https://wa.me/77010010001" target="_blank" rel="noreferrer"><Image src="/wa.png" alt="" width={24} height={24} /> +7 701 001 00 01</a>
+            <a className="mobile-phone" href="https://wa.me/77011161800" target="_blank" rel="noreferrer"><Image src="/wa.png" alt="" width={24} height={24} /> +7 701 001 00 01</a>
             <button className="button button-dark" onClick={() => { setMenuOpen(false); onBook(); }}>Записаться</button>
           </motion.div>
         )}

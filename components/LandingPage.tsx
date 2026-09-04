@@ -322,7 +322,7 @@ export function LandingPage() {
           <div className="consultation-actions">
             <button className="button button-light" onClick={() => openBooking()}>Записаться <CalendarDays size={18} /></button>
             <span>или</span>
-            <a className="whatsapp-link" href="https://wa.me/77010010001?text=Здравствуйте!%20Хочу%20записаться%20на%20консультацию." target="_blank" rel="noreferrer"><Image className="wa-icon" src="/wa.png" alt="" width={34} height={34} /> Написать<br />в WhatsApp</a>
+            <a className="whatsapp-link" href="https://wa.me/77011161800?text=Здравствуйте!%20Хочу%20записаться%20на%20консультацию." target="_blank" rel="noreferrer"><Image className="wa-icon" src="/wa.png" alt="" width={34} height={34} /> Написать<br />в WhatsApp</a>
           </div>
         </motion.section>
       </main>
@@ -336,7 +336,7 @@ export function LandingPage() {
 
       <div className="mobile-sticky">
         <a href="tel:+7 701 116 1800"><Phone size={18} />Позвонить</a>
-        <a href="https://wa.me/77010010001" target="_blank" rel="noreferrer"><Image className="wa-icon" src="/wa.png" alt="" width={21} height={21} />WhatsApp</a>
+        <a href="https://wa.me/77071161800" target="_blank" rel="noreferrer"><Image className="wa-icon" src="/wa.png" alt="" width={21} height={21} />WhatsApp</a>
         <button onClick={() => openBooking()}><CalendarDays size={18} />Записаться</button>
       </div>
 

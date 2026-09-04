@@ -156,7 +156,7 @@ export function BookingModal({ open, onClose, initialService }: BookingModalProp
                 <p>Администратор Liberty Stom уточнит детали и подберёт удобное время.</p>
                 <a
                   className="button button-dark"
-                  href="https://wa.me/77010010001?text=Здравствуйте!%20Хочу%20записаться%20на%20консультацию."
+                  href="https://wa.me/77011161800?text=Здравствуйте!%20Хочу%20записаться%20на%20консультацию."
                   target="_blank"
                   rel="noreferrer"
                 >
